@@ -1,0 +1,414 @@
+/* ==========================================================================
+   LaptopFix Bishkek — базовые стили поверх Tailwind (CDN)
+   Палитра дублируется CSS-переменными для мест, где нужен «сырой» CSS
+   (градиенты, тени), а не только Tailwind-утилиты.
+   ========================================================================== */
+
+:root {
+  --color-bg: #0B0D10;
+  --color-surface: #15181D;
+  --color-border: #262B33;
+  --color-accent: #29D9C2;
+  --color-cta: #FF7A45;
+  --color-ink: #EDEFF2;
+  --color-muted: #8A93A3;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 48px;
+  --space-6: 96px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px; /* высота фиксированного хедера + запас */
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Manrope', system-ui, sans-serif;
+}
+
+/* Ссылка «пропустить к форме» — доступность для клавиатурной навигации */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  background: var(--color-cta);
+  color: #17110B;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  transition: top 200ms var(--ease-out);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Видимый фокус для клавиатурной навигации по всей странице */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- Навигация ---------- */
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  transition: color 200ms var(--ease-out);
+}
+
+.nav-link:hover {
+  color: var(--color-ink);
+}
+
+.nav-link-mobile {
+  padding: 0.65rem 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  border-bottom: 1px solid var(--color-border);
+  transition: color 200ms var(--ease-out);
+}
+
+.nav-link-mobile:hover {
+  color: var(--color-ink);
+}
+
+.footer-link {
+  color: var(--color-muted);
+  transition: color 200ms var(--ease-out);
+}
+
+.footer-link:hover {
+  color: var(--color-accent);
+}
+
+/* ---------- Кнопки ---------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--color-cta);
+  color: #17110B;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.65rem;
+  box-shadow: 0 8px 24px -8px rgba(255, 122, 69, 0.55);
+  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out), background-color 200ms var(--ease-out);
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -8px rgba(255, 122, 69, 0.7);
+  background-color: #ff8c5e;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--color-ink);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--color-border);
+  transition: transform 200ms var(--ease-out), border-color 200ms var(--ease-out), color 200ms var(--ease-out);
+  white-space: nowrap;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.btn-lg {
+  padding: 0.85rem 1.75rem;
+  font-size: 1rem;
+}
+
+/* ---------- Бейдж над заголовком Hero ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+  background-color: rgba(41, 217, 194, 0.08);
+  border: 1px solid rgba(41, 217, 194, 0.35);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+}
+
+/* ---------- Декоративный техно-фон Hero ---------- */
+.hero-glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-glow--accent {
+  top: -120px;
+  right: -80px;
+  width: 420px;
+  height: 420px;
+  background: var(--color-accent);
+}
+
+.hero-glow--cta {
+  bottom: -160px;
+  left: -100px;
+  width: 380px;
+  height: 380px;
+  background: var(--color-cta);
+  opacity: 0.22;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, rgba(38, 43, 51, 0.5) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(38, 43, 51, 0.5) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 100%);
+  opacity: 0.5;
+}
+
+/* ---------- Появление секций ---------- */
+.fade-in-up {
+  animation: fadeInUp 400ms var(--ease-out) both;
+}
+
+.fade-in-up--delay {
+  animation-delay: 120ms;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .fade-in-up,
+  .btn-primary,
+  .btn-secondary {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Секция «Почему я» (#why)
+   ========================================================================== */
+.why-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  padding: var(--space-4);
+  transition: border-color 200ms var(--ease-out), transform 200ms var(--ease-out);
+}
+
+.why-card:hover {
+  border-color: rgba(41, 217, 194, 0.45);
+  transform: translateY(-2px);
+}
+
+.why-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  color: var(--color-accent);
+  background-color: rgba(41, 217, 194, 0.1);
+  border: 1px solid rgba(41, 217, 194, 0.3);
+}
+
+/* ==========================================================================
+   Секция «Как я работаю» (#process) — степпер:
+   горизонтальный со связующей линией на md+, вертикальный список на мобильном
+   ========================================================================== */
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.process-step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-accent);
+  color: var(--color-accent);
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  background-color: var(--color-bg);
+}
+
+.process-step-body {
+  padding-top: 0.35rem;
+}
+
+@media (min-width: 768px) {
+  .process-steps {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .process-step {
+    position: relative;
+    flex: 1 1 0%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 var(--space-3);
+  }
+
+  .process-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 1.375rem; /* центр круга (2.75rem / 2) */
+    left: calc(50% + 1.375rem);
+    width: calc(100% - 2.75rem);
+    height: 2px;
+    background-color: var(--color-border);
+  }
+
+  .process-step-body {
+    padding-top: var(--space-3);
+  }
+}
+
+/* ---------- Форма заявки (#request) ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+.field-input {
+  width: 100%;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0.6rem;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.95rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--color-ink);
+  transition: border-color 200ms var(--ease-out);
+}
+
+.field-input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.75;
+}
+
+.field-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.field-textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.field.has-error .field-input {
+  border-color: var(--color-cta);
+}
+
+.field-error {
+  font-size: 0.8rem;
+  color: var(--color-cta);
+}
+
+.form-status {
+  min-height: 1.3em;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.form-status--success {
+  color: var(--color-accent);
+}
+
+.form-status--error {
+  color: var(--color-cta);
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
