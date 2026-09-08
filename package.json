@@ -1,0 +1,15 @@
+{
+  "name": "laptop-repair-bishkek",
+  "version": "1.0.0",
+  "description": "Landing page + lead request API for a laptop repair master in Bishkek",
+  "private": true,
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "express": "^4.21.0"
+  }
+}
