@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LaptopFix Bishkek — ремонт ноутбуков с выездом и гарантией</title>
+  <meta name="description" content="Частный мастер по ремонту ноутбуков в Бишкеке: диагностика, чистка, замена матрицы, клавиатуры, SSD, восстановление после залития. Выезд на дом, гарантия на работы." />
+
+  <!-- Google Fonts: Manrope для заголовков, Inter для текста -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN + кастомная палитра из брифа -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#0B0D10',
+            surface: '#15181D',
+            border: '#262B33',
+            accent: '#29D9C2',
+            cta: '#FF7A45',
+            ink: '#EDEFF2',
+            muted: '#8A93A3',
+          },
+          fontFamily: {
+            heading: ['Manrope', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body id="top" class="min-h-screen bg-bg font-sans text-ink antialiased">
+  <a href="#request" class="skip-link">Перейти к форме заявки</a>
+
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-border/80 bg-bg/85 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+      <a href="#top" class="flex items-center gap-2 shrink-0" aria-label="LaptopFix Bishkek — на главную">
+        <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect x="2" y="2" width="28" height="28" rx="8" fill="#15181D" stroke="#262B33" stroke-width="1.5" />
+          <path d="M10 20V12a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8" stroke="#29D9C2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M7 22h18l-1.6 3.2a1 1 0 0 1-.9.6H9.5a1 1 0 0 1-.9-.6L7 22Z" stroke="#FF7A45" stroke-width="1.8" stroke-linejoin="round" />
+          <path d="M15.2 12.6 12.8 16h2.6l-1 3.4 3.4-4h-2.4l1-2.8Z" fill="#FF7A45" />
+        </svg>
+        <span class="font-heading text-lg font-extrabold tracking-tight text-ink">
+          LaptopFix <span class="text-accent">Bishkek</span>
+        </span>
+      </a>
+
+      <nav id="primary-nav" class="hidden items-center gap-8 md:flex" aria-label="Основная навигация">
+        <a href="#services" class="nav-link">Услуги и цены</a>
+        <a href="#process" class="nav-link">Как я работаю</a>
+        <a href="#contacts" class="nav-link">Контакты</a>
+      </nav>
+
+      <div class="hidden items-center gap-5 md:flex">
+        <a href="tel:+996700000000" data-contact-phone-href data-contact-phone class="text-sm font-medium text-muted transition-colors duration-200 hover:text-accent">
+          +996 700 000 000
+        </a>
+        <a href="#request" class="btn-primary">Оставить заявку</a>
+      </div>
+
+      <button
+        id="menu-toggle"
+        type="button"
+        class="inline-flex items-center justify-center rounded-lg border border-border p-2 text-ink transition-colors duration-200 hover:border-accent hover:text-accent md:hidden"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label="Открыть меню"
+      >
+        <svg id="menu-icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+        <svg id="menu-icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="hidden">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden border-t border-border bg-bg px-4 pb-6 pt-3 md:hidden">
+      <nav class="flex flex-col gap-1" aria-label="Мобильная навигация">
+        <a href="#services" class="nav-link-mobile">Услуги и цены</a>
+        <a href="#process" class="nav-link-mobile">Как я работаю</a>
+        <a href="#contacts" class="nav-link-mobile">Контакты</a>
+      </nav>
+      <div class="mt-4 flex flex-col gap-3">
+        <a href="tel:+996700000000" data-contact-phone-href data-contact-phone class="text-sm font-medium text-muted transition-colors duration-200 hover:text-accent">
+          +996 700 000 000
+        </a>
+        <a href="#request" class="btn-primary w-full text-center">Оставить заявку</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="relative isolate overflow-hidden pb-20 pt-28 sm:pb-28 sm:pt-36 lg:pb-36 lg:pt-44">
+      <div class="hero-glow hero-glow--accent" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow--cta" aria-hidden="true"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+
+      <div class="relative mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[3fr_2fr] lg:items-center lg:px-8">
+        <div class="fade-in-up">
+          <p class="badge">Мастер по ремонту ноутбуков · Бишкек</p>
+          <h1 class="mt-5 max-w-2xl font-heading text-4xl font-extrabold leading-tight tracking-tight text-ink sm:text-5xl lg:text-6xl">
+            Ремонт ноутбуков в Бишкеке —
+            <span class="text-cta">с выездом</span> и гарантией на работы
+          </h1>
+          <p class="mt-6 max-w-xl text-base text-muted sm:text-lg">
+            Диагностирую и чиню ноутбуки любых марок: от зависаний и перегрева до
+            замены матрицы и восстановления после залития. Приезжаю на дом или в
+            офис, называю цену до начала работ — без сюрпризов в чеке.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a href="#request" class="btn-primary btn-lg">Оставить заявку</a>
+            <a href="tel:+996700000000" data-contact-phone-href class="btn-secondary btn-lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+              </svg>
+              Позвонить
+            </a>
+          </div>
+        </div>
+
+        <div class="fade-in-up fade-in-up--delay relative hidden justify-self-center lg:flex" aria-hidden="true">
+          <svg width="320" height="320" viewBox="0 0 320 320" fill="none" class="w-full max-w-sm">
+            <rect x="40" y="60" width="240" height="150" rx="14" fill="#15181D" stroke="#262B33" stroke-width="1.5" />
+            <rect x="58" y="78" width="204" height="114" rx="6" fill="#0B0D10" stroke="#262B33" />
+            <path d="M20 230h280l-14 24a10 10 0 0 1-8.6 5H42.6a10 10 0 0 1-8.6-5L20 230Z" fill="#15181D" stroke="#262B33" stroke-width="1.5" />
+            <g stroke="#29D9C2" stroke-width="1.4" stroke-linecap="round" opacity="0.9">
+              <path d="M90 100h40M90 112h64M90 124h30" />
+            </g>
+            <rect x="150" y="118" width="46" height="46" rx="6" fill="#101317" stroke="#FF7A45" stroke-width="1.6" />
+            <path d="M150 130h-12M150 142h-12M150 154h-12M196 130h12M196 142h12M196 154h12M162 118v-12M174 118v-12M186 118v-12M162 164v12M174 164v12M186 164v12" stroke="#FF7A45" stroke-width="1.4" stroke-linecap="round" />
+            <circle cx="256" cy="46" r="20" fill="#101317" stroke="#29D9C2" stroke-width="1.6" />
+            <path d="M256 38v8l6 4" stroke="#29D9C2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="scroll-mt-24 border-t border-border py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl">
+          <p class="badge">Услуги и цены</p>
+          <h2 class="mt-5 font-heading text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+            Чиню то, из-за чего ноутбук тормозит, греется или не включается
+          </h2>
+          <p class="mt-4 text-base text-muted">
+            Работаю с ноутбуками любых марок — от чистки и апгрейда до пайки
+            платы. Диагностирую бесплатно, если ремонт делаете у меня, и
+            называю цену до начала работ.
+          </p>
+        </div>
+
+        <div class="mt-8 flex items-start gap-3 rounded-xl border border-cta/30 bg-cta/10 p-4 sm:mt-10">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="mt-0.5 shrink-0 text-cta">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" />
+            <path d="M12 8v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            <path d="M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <p class="text-sm text-ink">
+            <span class="font-semibold text-cta">*Цены ориентировочные,</span>
+            точная стоимость — после диагностики. Она зависит от модели
+            ноутбука и сложности неисправности.
+          </p>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 gap-5 sm:mt-12 md:grid-cols-2 lg:grid-cols-3">
+          <article class="rounded-2xl border border-border bg-surface p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent/40">
+            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="10" cy="10" r="6" stroke="currentColor" stroke-width="1.6" />
+                <path d="M14.5 14.5 20 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                <path d="M7 10h1.5l1-2 1.5 4 1-2H14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <h3 class="font-heading text-base font-bold text-ink">Диагностика неисправности</h3>
+            <p class="mt-1 text-sm font-semibold text-accent">От 300 сом</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Бесплатно, если ремонт делаете у меня</p>
+          </article>
+
+          <article class="rounded-2xl border border-border bg-surface p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent/40">
+            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="1.6" stroke="currentColor" stroke-width="1.5" />
+                <path d="M12 10.2c0-2.4-1-4.6-2.8-5.6-1.6-.9-2.8.5-2 1.9.9 1.6 2.8 2.6 4.8 3.7Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+                <path d="M13.8 12c2.4 0 4.6-1 5.6-2.8.9-1.6-.5-2.8-1.9-2-1.6.9-2.6 2.8-3.7 4.8Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+                <path d="M12 13.8c0 2.4 1 4.6 2.8 5.6 1.6.9 2.8-.5 2-1.9-.9-1.6-2.8-2.6-4.8-3.7Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+                <path d="M10.2 12c-2.4 0-4.6 1-5.6 2.8-.9 1.6.5 2.8 1.9 2 1.6-.9 2.6-2.8 3.7-4.8Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <h3 class="font-heading text-base font-bold text-ink">Чистка от пыли + термопаста</h3>
+            <p class="mt-1 text-sm font-semibold text-accent">От 800 сом</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Убирает перегрев, шум кулера и троттлинг</p>
+          </article>
+
+          <article class="rounded-2xl border border-border bg-surface p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent/40">
+            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3.5" y="4.5" width="17" height="11" rx="1.5" stroke="currentColor" stroke-width="1.6" />
+                <path d="M9 19.5h6M12 15.5v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+            </span>
+            <h3 class="font-heading text-base font-bold text-ink">Замена матрицы (экрана)</h3>
+            <p class="mt-1 text-sm font-semibold text-accent">От 3500 сом</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Установка новой матрицы взамен разбитой</p>
+          </article>
+
+          <article class="rounded-2xl border border-border bg-surface p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent/40">
+            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="6" width="18" height="12" rx="1.8" stroke="currentColor" stroke-width="1.6" />
+                <path d="M6.5 10h.01M9.5 10h.01M12.5 10h.01M15.5 10h.01M17.5 10h.01M6.5 13h.01M17.5 13h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                <path d="M9 15h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+            </span>
+            <h3 class="font-heading text-base font-bold text-ink">Замена клавиатуры</h3>
+            <p class="mt-1 text-sm font-semibold text-accent">От 1500 сом</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">После залития или механических повреждений</p>
+          </article>
+
+          <article class="rounded-2xl border border-border bg-surface p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent/40">
+            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6" />
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.4" />
+                <path d="M7 7h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </span>
+            <h3 class="font-heading text-base font-bold text-ink">Установка/замена SSD или HDD</h3>
+            <p class="mt-1 text-sm font-semibold text-accent">От 500 сом</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Ускоряю систему, без стоимости накопителя</p>
+          </article>
+
+          <article class="rounded-2xl border border-border bg-surface p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent/40">
+            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="7" y="7" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.6" />
+                <path d="M9.5 7V4M14.5 7V4M9.5 20v-3M14.5 20v-3M7 9.5H4M7 14.5H4M20 9.5h-3M20 14.5h-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+            </span>
+            <h3 class="font-heading text-base font-bold text-ink">Ремонт материнской платы (пайка)</h3>
+            <p class="mt-1 text-sm font-semibold text-accent">От 2500 сом</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Диагностика и пайка цепей питания, чипов</p>
+          </article>
+
+          <article class="rounded-2xl border border-border bg-surface p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent/40">
+            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3.5c3 3.8 5.5 7 5.5 10a5.5 5.5 0 1 1-11 0c0-3 2.5-6.2 5.5-10Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <h3 class="font-heading text-base font-bold text-ink">Восстановление после залития</h3>
+            <p class="mt-1 text-sm font-semibold text-accent">От 2000 сом</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Чистка платы, сушка, замена повреждённых элементов</p>
+          </article>
+
+          <article class="rounded-2xl border border-border bg-surface p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent/40">
+            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3.5" y="4" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5" />
+                <rect x="12.5" y="4" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5" />
+                <rect x="3.5" y="12" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5" />
+                <rect x="12.5" y="12" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5" />
+              </svg>
+            </span>
+            <h3 class="font-heading text-base font-bold text-ink">Установка Windows и драйверов</h3>
+            <p class="mt-1 text-sm font-semibold text-accent">От 800 сом</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Настройка системы и всех драйверов «под ключ»</p>
+          </article>
+
+          <article class="rounded-2xl border border-border bg-surface p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent/40">
+            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 3v4M15 3v4M7 7h10v3a5 5 0 0 1-5 5 5 5 0 0 1-5-5V7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                <path d="M12 15v3M9 21h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+            </span>
+            <h3 class="font-heading text-base font-bold text-ink">Замена разъёма питания</h3>
+            <p class="mt-1 text-sm font-semibold text-accent">От 1200 сом</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Решает проблему «не заряжается» и шаткий разъём</p>
+          </article>
+
+          <article class="rounded-2xl border border-border bg-surface p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent/40">
+            <span class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="7" width="16" height="10" rx="1.8" stroke="currentColor" stroke-width="1.6" />
+                <path d="M21 10.5v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                <path d="M12 9.5l-2.5 3.5H12l-1 2.5 3-3.5h-2.2l.7-2.5Z" fill="currentColor" />
+              </svg>
+            </span>
+            <h3 class="font-heading text-base font-bold text-ink">Замена аккумулятора</h3>
+            <p class="mt-1 text-sm font-semibold text-accent">От 700 сом</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Установка новой батареи, без её стоимости</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" class="border-t border-border/60 bg-surface/40">
+      <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+        <div class="max-w-2xl">
+          <p class="badge">Почему выбирают меня</p>
+          <h2 class="mt-5 font-heading text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+            Честный ремонт без переплат и лишнего времени
+          </h2>
+          <p class="mt-4 max-w-xl text-base text-muted sm:text-lg">
+            Работаю так, как хотел бы, чтобы работали со мной: понятная диагностика,
+            реальная цена и ответственность за результат.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="why-card">
+            <span class="why-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <h3 class="mt-5 font-heading text-lg font-bold text-ink">Ремонт ноутбуков любых брендов</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">
+              Asus, Lenovo, HP, Dell, Acer, MacBook и другие — от зависаний и
+              перегрева до пайки материнской платы.
+            </p>
+          </div>
+
+          <div class="why-card">
+            <span class="why-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <circle cx="10.5" cy="10.5" r="6" stroke="currentColor" stroke-width="1.6" />
+                <path d="M15 15l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+            </span>
+            <h3 class="mt-5 font-heading text-lg font-bold text-ink">Бесплатная диагностика при ремонте</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">
+              Если после диагностики вы соглашаетесь на ремонт у меня — сама
+              диагностика ничего не стоит.
+            </p>
+          </div>
+
+          <div class="why-card">
+            <span class="why-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <h3 class="mt-5 font-heading text-lg font-bold text-ink">Гарантия на выполненные работы</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">
+              Если неисправность повторится в гарантийный срок по моей вине —
+              устраняю её бесплатно.
+            </p>
+          </div>
+
+          <div class="why-card">
+            <span class="why-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M4 11.5 12 4l8 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M6 10v9a1 1 0 0 0 1 1h3v-5h4v5h3a1 1 0 0 0 1-1v-9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <h3 class="mt-5 font-heading text-lg font-bold text-ink">Выезд на дом или в офис</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">
+              Приезжаю сам с инструментом и диагностическим оборудованием — не
+              нужно никуда везти ноутбук.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="border-t border-border/60">
+      <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+        <div class="max-w-2xl">
+          <p class="badge">Как я работаю</p>
+          <h2 class="mt-5 font-heading text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+            От заявки до рабочего ноутбука — 4 понятных шага
+          </h2>
+          <p class="mt-4 max-w-xl text-base text-muted sm:text-lg">
+            Никаких скрытых этапов: вы всегда знаете, что происходит с ноутбуком
+            и сколько это будет стоить.
+          </p>
+        </div>
+
+        <ol class="process-steps mt-14">
+          <li class="process-step">
+            <span class="process-step-num" aria-hidden="true">1</span>
+            <div class="process-step-body">
+              <h3 class="font-heading text-base font-bold text-ink">Заявка</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-muted">
+                Оставляете заявку на сайте или звоните — коротко описываете
+                проблему и модель ноутбука.
+              </p>
+            </div>
+          </li>
+          <li class="process-step">
+            <span class="process-step-num" aria-hidden="true">2</span>
+            <div class="process-step-body">
+              <h3 class="font-heading text-base font-bold text-ink">Диагностика</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-muted">
+                Выясняю точную причину неисправности — у вас дома, в офисе или
+                удалённо по описанию симптомов.
+              </p>
+            </div>
+          </li>
+          <li class="process-step">
+            <span class="process-step-num" aria-hidden="true">3</span>
+            <div class="process-step-body">
+              <h3 class="font-heading text-base font-bold text-ink">Согласование стоимости</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-muted">
+                Называю итоговую цену ремонта и сроки. Приступаю к работе
+                только после вашего согласия.
+              </p>
+            </div>
+          </li>
+          <li class="process-step">
+            <span class="process-step-num" aria-hidden="true">4</span>
+            <div class="process-step-body">
+              <h3 class="font-heading text-base font-bold text-ink">Ремонт и выдача с гарантией</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-muted">
+                Устраняю неисправность, проверяю ноутбук под нагрузкой и
+                передаю вам с гарантией на выполненные работы.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="request" class="border-t border-border bg-surface/40 py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="badge">Заявка</p>
+          <h2 class="mt-5 font-heading text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+            Оставить заявку на ремонт
+          </h2>
+          <p class="mt-4 text-base text-muted">
+            Опишите проблему и оставьте контакты — перезвоню в течение рабочего дня,
+            назову предварительную цену и договоримся о времени диагностики.
+          </p>
+        </div>
+
+        <form id="request-form" novalidate class="mx-auto mt-10 grid max-w-2xl gap-5 rounded-2xl border border-border bg-surface p-5 sm:p-8">
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div class="field">
+              <label for="request-name" class="field-label">Имя *</label>
+              <input
+                id="request-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+                aria-describedby="request-name-error"
+                class="field-input"
+                placeholder="Как к вам обращаться"
+              />
+              <p id="request-name-error" class="field-error" role="alert" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="request-phone" class="field-label">Телефон *</label>
+              <input
+                id="request-phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                required
+                aria-describedby="request-phone-error"
+                class="field-input"
+                placeholder="+996 700 000 000"
+              />
+              <p id="request-phone-error" class="field-error" role="alert" hidden></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="request-model" class="field-label">Модель ноутбука</label>
+            <input
+              id="request-model"
+              name="model"
+              type="text"
+              autocomplete="off"
+              class="field-input"
+              placeholder="Например, Lenovo IdeaPad 3 15"
+            />
+          </div>
+
+          <div class="field">
+            <label for="request-problem" class="field-label">Описание проблемы *</label>
+            <textarea
+              id="request-problem"
+              name="problem"
+              rows="4"
+              required
+              aria-describedby="request-problem-error"
+              class="field-input field-textarea"
+              placeholder="Что случилось: не включается, греется, разбит экран, залили жидкостью..."
+            ></textarea>
+            <p id="request-problem-error" class="field-error" role="alert" hidden></p>
+          </div>
+
+          <button type="submit" id="request-submit" class="btn-primary btn-lg justify-center">
+            <span id="request-submit-label">Отправить заявку</span>
+          </button>
+
+          <p id="request-status" class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="contacts" class="border-t border-border py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl">
+          <p class="badge">Контакты</p>
+          <h2 class="mt-5 font-heading text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+            Свяжитесь любым удобным способом
+          </h2>
+          <p class="mt-4 max-w-xl text-base text-muted sm:text-lg">
+            Отвечаю на звонки и сообщения ежедневно. Можно позвонить, написать
+            в WhatsApp или Telegram — или оставить заявку в форме выше.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-8 sm:mt-12 lg:grid-cols-2 lg:items-stretch lg:gap-10">
+          <div class="rounded-2xl border border-border bg-surface p-6 sm:p-8">
+            <ul class="space-y-6">
+              <li class="flex items-start gap-4">
+                <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <div class="min-w-0">
+                  <p class="text-xs font-semibold uppercase tracking-wide text-muted">Телефон</p>
+                  <a
+                    href="tel:+996700000000"
+                    data-contact-phone-href
+                    data-contact-phone
+                    class="mt-1 block break-words font-heading text-lg font-bold text-ink transition-colors duration-200 hover:text-accent"
+                  >
+                    +996 700 000 000
+                  </a>
+                </div>
+              </li>
+
+              <li class="flex items-start gap-4">
+                <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 12a8 8 0 1 1 3.2 6.4L4 20l1.2-3.6A7.96 7.96 0 0 1 4 12Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <div class="min-w-0">
+                  <p class="text-xs font-semibold uppercase tracking-wide text-muted">Мессенджеры</p>
+                  <div class="mt-1 flex flex-wrap gap-x-4 gap-y-1">
+                    <a
+                      href="https://wa.me/996700000000"
+                      data-contact-whatsapp-href
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="font-medium text-ink transition-colors duration-200 hover:text-accent"
+                    >
+                      WhatsApp
+                    </a>
+                    <a
+                      href="https://t.me/laptopfix_bishkek"
+                      data-contact-telegram-href
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="font-medium text-ink transition-colors duration-200 hover:text-accent"
+                    >
+                      Telegram
+                    </a>
+                  </div>
+                </div>
+              </li>
+
+              <li class="flex items-start gap-4">
+                <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                    <circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.6" />
+                  </svg>
+                </span>
+                <div class="min-w-0">
+                  <p class="text-xs font-semibold uppercase tracking-wide text-muted">Адрес / зона выезда</p>
+                  <p data-contact-address class="mt-1 text-base text-ink">
+                    Бишкек, выезд по городу (адрес мастерской уточняется)
+                  </p>
+                </div>
+              </li>
+
+              <li class="flex items-start gap-4">
+                <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M12 7.5V12l3.2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <div class="min-w-0">
+                  <p class="text-xs font-semibold uppercase tracking-wide text-muted">Часы работы</p>
+                  <p data-contact-hours class="mt-1 text-base text-ink">Ежедневно, 09:00–20:00</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="overflow-hidden rounded-2xl border border-border">
+            <iframe
+              title="Карта: зона выезда мастера по ремонту ноутбуков в Бишкеке"
+              src="https://www.google.com/maps?q=42.8746,74.5698&z=12&output=embed"
+              width="100%"
+              height="380"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="block h-[280px] w-full sm:h-[340px] lg:h-full lg:min-h-[380px]"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-border bg-surface/60">
+    <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div>
+          <a href="#top" class="flex items-center gap-2" aria-label="LaptopFix Bishkek — на главную">
+            <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <rect x="2" y="2" width="28" height="28" rx="8" fill="#0B0D10" stroke="#262B33" stroke-width="1.5" />
+              <path d="M10 20V12a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8" stroke="#29D9C2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M7 22h18l-1.6 3.2a1 1 0 0 1-.9.6H9.5a1 1 0 0 1-.9-.6L7 22Z" stroke="#FF7A45" stroke-width="1.8" stroke-linejoin="round" />
+            </svg>
+            <span class="font-heading text-base font-extrabold text-ink">LaptopFix <span class="text-accent">Bishkek</span></span>
+          </a>
+          <p class="mt-4 max-w-xs text-sm text-muted">
+            Частный мастер по ремонту ноутбуков. Диагностика, ремонт и выезд по
+            Бишкеку — прозрачные цены, гарантия на выполненные работы.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading text-sm font-bold uppercase tracking-wide text-muted">Навигация</h2>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li><a href="#services" class="footer-link">Услуги и цены</a></li>
+            <li><a href="#process" class="footer-link">Как я работаю</a></li>
+            <li><a href="#request" class="footer-link">Оставить заявку</a></li>
+            <li><a href="#contacts" class="footer-link">Контакты</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-heading text-sm font-bold uppercase tracking-wide text-muted">Связаться</h2>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li>
+              <a href="tel:+996700000000" data-contact-phone-href data-contact-phone class="footer-link">+996 700 000 000</a>
+            </li>
+            <li>
+              <a href="https://wa.me/996700000000" data-contact-whatsapp-href target="_blank" rel="noopener noreferrer" class="footer-link">WhatsApp</a>
+            </li>
+            <li>
+              <a href="https://t.me/laptopfix_bishkek" data-contact-telegram-href target="_blank" rel="noopener noreferrer" class="footer-link">Telegram</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="year">2026</span> LaptopFix Bishkek. Все права защищены.</p>
+        <p>Контакты и цены на сайте — ориентировочные и подлежат подтверждению.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
