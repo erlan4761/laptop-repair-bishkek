@@ -240,16 +240,18 @@ function initRequestForm() {
 
     setRequestFormLoading(true);
 
+    const trimmed = {
+      name: data.name.trim(),
+      phone: data.phone.trim(),
+      model: data.model.trim(),
+      problem: data.problem.trim(),
+    };
+
     try {
       const response = await fetch('/api/requests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: data.name.trim(),
-          phone: data.phone.trim(),
-          model: data.model.trim(),
-          problem: data.problem.trim(),
-        }),
+        body: JSON.stringify(trimmed),
       });
 
       let result = null;
@@ -269,14 +271,52 @@ function initRequestForm() {
         setRequestFormStatus(errorMessage, 'error');
       }
     } catch (networkError) {
-      setRequestFormStatus(
-        'Нет соединения с сервером. Проверьте интернет и попробуйте снова или позвоните напрямую.',
-        'error'
-      );
+      // /api/requests is unreachable — typical for a static Netlify deploy
+      // without the self-hosted Express backend running. Fall back to a
+      // native Netlify Forms submission instead of showing a network error.
+      await submitViaNetlifyForms(form, trimmed);
     } finally {
       setRequestFormLoading(false);
     }
   });
+}
+
+/**
+ * Fallback path for static Netlify deploys: submits the request form data
+ * as a standard Netlify Forms POST to "/" (the form is pre-rendered in the
+ * static HTML with data-netlify="true" so Netlify's build-time scanner
+ * picks it up). Used only when POST /api/requests fails with a network
+ * error, i.e. no self-hosted Express backend is available.
+ */
+async function submitViaNetlifyForms(form, data) {
+  try {
+    const netlifyResponse = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'form-name': 'request',
+        name: data.name,
+        phone: data.phone,
+        model: data.model,
+        problem: data.problem,
+      }).toString(),
+    });
+
+    if (netlifyResponse.ok) {
+      setRequestFormStatus('Заявка отправлена, я свяжусь с вами в ближайшее время.', 'success');
+      form.reset();
+    } else {
+      setRequestFormStatus(
+        'Нет соединения с сервером. Проверьте интернет и попробуйте снова или позвоните напрямую.',
+        'error'
+      );
+    }
+  } catch (netlifyError) {
+    setRequestFormStatus(
+      'Нет соединения с сервером. Проверьте интернет и попробуйте снова или позвоните напрямую.',
+      'error'
+    );
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
