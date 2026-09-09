@@ -1,17 +1,16 @@
 /**
- * LaptopFix Bishkek — client-side scripts.
+ * QWE — client-side scripts.
  *
  * CONTACTS is the single source of truth for contact details across the
- * page (header, footer, future #contacts section). Values below are
- * PLACEHOLDERS — replace them with real data before launch.
+ * page (header, footer, #contacts section).
  */
 const CONTACTS = {
-  phone: '+996 700 000 000',
-  phoneHref: 'tel:+996700000000',
-  whatsappHref: 'https://wa.me/996700000000',
-  telegramHref: 'https://t.me/laptopfix_bishkek',
-  address: 'Бишкек, выезд по городу (адрес мастерской уточняется)',
-  hours: 'Ежедневно, 09:00–20:00',
+  phone: '+996 550 535 917',
+  phoneHref: 'tel:+996550535917',
+  whatsappHref: 'https://wa.me/996550535917',
+  telegramHref: 'https://t.me/+996550535917',
+  address: 'Бишкек, ул. Токтогула, 165',
+  hours: 'Ежедневно, 10:00–20:00',
 };
 
 /**
