@@ -263,11 +263,19 @@ function initRequestForm() {
       if (response.ok && result && result.ok) {
         setRequestFormStatus('Заявка отправлена, я свяжусь с вами в ближайшее время.', 'success');
         form.reset();
+      } else if (result && typeof result.error === 'string') {
+        // Real self-hosted Express backend answered with a valid JSON
+        // error (e.g. server-side validation) — show it as is.
+        setRequestFormStatus(result.error, 'error');
       } else {
-        const errorMessage =
-          (result && result.error) ||
-          'Не удалось отправить заявку. Попробуйте ещё раз или позвоните напрямую.';
-        setRequestFormStatus(errorMessage, 'error');
+        // Either result === null (not JSON — typical for a 404 HTML page
+        // returned by a static host like Netlify when /api/requests does
+        // not exist) or the response otherwise doesn't look like a real
+        // API answer. Treat the self-hosted API as unavailable and fall
+        // back to a native Netlify Forms submission instead of showing a
+        // generic error.
+        await submitViaNetlifyForms(form, trimmed);
+        return;
       }
     } catch (networkError) {
       // /api/requests is unreachable — typical for a static Netlify deploy
